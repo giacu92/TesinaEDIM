@@ -13,10 +13,18 @@ class Serbatoio
   private float m, q = 0;
   
   // Costruttore:
+  /**
+  *  Inizializza un serbatoio pieno di default di capacità scelta.
+  *  @param _name il nome da assegnare al serbatoio
+  *  @param _maxVolume la capacità massima del serbatoio
+  *  @param _imageWidth  larghezza dell'immagine in px
+  *  @param _imageHeight  altezza dell'immagine in px
+  *  @param _color  il colore da impostare nella visione del volume residuo
+  */
   Serbatoio(String _name, float _maxVolume, int _imageWidth, int _imageHeight, color _colore)
   {
     this.name           = _name;
-    this.maxVolume      = _maxVolume;
+    this.setMaxVolume(_maxVolume);
     this.currentVolume  = maxVolume;
     this.imageWidth     = _imageWidth;
     this.imageHeight    = _imageHeight;
@@ -92,7 +100,7 @@ class Serbatoio
     boolean done = false;
     if (currentVolume-toll >= _volume)
     {
-      currentVolume -= _volume;
+      currentVolume = currentVolume - _volume;
       done = true;
     }
     else
@@ -171,5 +179,33 @@ class Serbatoio
   String getName()
   {
     return this.name;
+  }
+  
+  /**
+  *  Ritorna il massimo volume del serbatoio.
+  *  @return il massimo volume del serbatoio.
+  */
+  float getMaxVolume()
+  {
+    return this.maxVolume;
+  }
+  
+  /**
+  *  Imposta il massimo volume per il serbatoio
+  *  @param _value il massimo volume per il serbatoio
+  */
+  boolean setMaxVolume(float _value)
+  {
+    if(_value > 0)
+    {
+      this.maxVolume = _value;
+      return true;
+    }
+    else
+    {
+      this.maxVolume = 0;
+      return false;
+    }
+    
   }
 }

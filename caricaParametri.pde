@@ -8,8 +8,7 @@ void caricaParametri()
   // Carico i parametri Base dal file configSerbatoi //
   /////////////////////////////////////////////////////
   
-  // Se il file è presente lo carico altrimenti segnalo e creo un nuovo 
-  // file di default
+  // Se il file è presente lo carico altrimenti segnalo
   try
   {
     reader = createReader(dataPath("configSerbatoi.csv"));
@@ -36,14 +35,5 @@ void caricaParametri()
     println("file configSerbatoi.csv inaccessibile. Parametri caricati di default");
     serbatoio1 = new Serbatoio("S1", 100, 120, 160, c1); // nome, volume, Width, Height, colore
     serbatoio2 = new Serbatoio("S2", 100, 120, 160, c2);
-    
-    //creo il file per la prossima volta:
-    PrintWriter output;
-    output = createWriter(dataPath("configSerbatoi.csv"));
-    output.println("name,maxVolume,currentVolume");
-    output.println("S1,100,100");
-    output.println("S2,100,100");
-    output.flush();
-    output.close();
   }
 }
