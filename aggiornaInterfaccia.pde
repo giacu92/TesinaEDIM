@@ -10,9 +10,9 @@ void aggiornaInterfaccia()
     finestraLogMacchina.text("Diluizione: 1:" + nf(diluizione, 0, 0), 10, 30);
     finestraLogMacchina.text(serbatoioError, 10, 50);
   finestraLogMacchina.endDraw();
-  image(finestraLogMacchina, 150, 30);
+  image(finestraLogMacchina, 290, 30);
   
   //Serbatoi:
-  image(serbatoio1.drawVolume(), 30,  210);
-  image(serbatoio2.drawVolume(), 150, 210);
+  image(serbatoio1.drawVolume(), 30,  260);
+  image(serbatoio2.drawVolume(), 150, 260);
 }

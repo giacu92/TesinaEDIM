@@ -49,22 +49,54 @@ public void buttonVolDec_click(GButton source, GEvent event)
 /**  DILUIZIONE 1:1
 *  Fissa la diluizione 1 a 1
 */
-public void button1_1_click(GButton source, GEvent event)  {diluizione = 1;}
+public void button1_1_click(GButton source, GEvent event)
+{
+  // imposto diluizione a 1 e metto gli altri tasti blu
+  diluizione = 1;
+  button1_1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+}
 
 /**  DILUIZIONE 1:1.5
 *  Fissa la diluizione 1 a 1.5
 */
-public void button1_15_click(GButton source, GEvent event)  {diluizione = 1.5;}
+public void button1_15_click(GButton source, GEvent event)
+{
+  // imposto diluizione a 1.5 e metto gli altri tasti blu
+  diluizione = 1.5;
+  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_15.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+}
 
 /**  DILUIZIONE 1:2
 *  Fissa la diluizione 1 a 2
 */
-public void button1_2_click(GButton source, GEvent event)  {diluizione = 2;}
+public void button1_2_click(GButton source, GEvent event)
+{
+  // imposto diluizione a 2 e metto gli altri tasti blu
+  diluizione = 2;
+  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_2.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+}
 
 /**  DILUIZIONE 1:3
 *  Fissa la diluizione 1 a 3
 */
-public void button1_3_click(GButton source, GEvent event)  {diluizione = 3;}
+public void button1_3_click(GButton source, GEvent event)
+{
+  // imposto diluizione a 3 e metto gli altri tasti blu
+  diluizione = 3;
+  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_3.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+}
 
 /**  Inizia la procedura di miscelazione:
 *  Diminuisce di una unità la quantità di crema totale richiesta.
@@ -88,7 +120,7 @@ public void buttonStart_click(GButton source, GEvent event)
     else
     {
       serbatoioError = "Quantità di " + serbatoio2.getName() + " non sufficiente";
-      serbatoio1.refill(3);
+      serbatoio1.refill(vol);
     }
   }
   else  serbatoioError = "Quantità di " + serbatoio1.getName() + " non sufficiente";
@@ -129,7 +161,7 @@ public void createGUI()
   surface.setTitle("Tesina EDIM 2017 - Giacomo Mammarella");
   
   //TextFields:                      X    Y    W    H
-  tfQuantity = new GTextField(this, 340,  23,  70,  24, G4P.SCROLLBARS_NONE);
+  tfQuantity = new GTextField(this, 480,  23,  70,  24, G4P.SCROLLBARS_NONE);
   
   tfQuantity.setText("100.0");
   tfQuantity.setOpaque(true);
@@ -138,15 +170,15 @@ public void createGUI()
   
   //Buttons                           X    Y    W    H
   buttonTara     = new GButton(this, 30,  30,  100, 100);
-  buttonVolInc   = new GButton(this, 690, 30,  80,  45 );
-  buttonVolDec   = new GButton(this, 690, 85,  80,  45 );
-  button1_1      = new GButton(this, 30,  150, 140, 50 );
-  button1_15     = new GButton(this, 230, 150, 140, 50 );
-  button1_2      = new GButton(this, 430, 150, 140, 50 );
-  button1_3      = new GButton(this, 630, 150, 140, 50 );
-  buttonStart    = new GButton(this, 430, 230, 340, 80 );
-  buttonRefill_1 = new GButton(this, 50,  380, 80,  30 );
-  buttonRefill_2 = new GButton(this, 170, 380, 80,  30 );
+  buttonVolInc   = new GButton(this, 190, 30,  80,  45 );
+  buttonVolDec   = new GButton(this, 190, 85,  80,  45 );
+  button1_1      = new GButton(this, 30,  200, 140, 50 );
+  button1_15     = new GButton(this, 230, 200, 140, 50 );
+  button1_2      = new GButton(this, 430, 200, 140, 50 );
+  button1_3      = new GButton(this, 630, 200, 140, 50 );
+  buttonStart    = new GButton(this, 430, 280, 340, 80 );
+  buttonRefill_1 = new GButton(this, 50,  430, 80,  30 );
+  buttonRefill_2 = new GButton(this, 170, 430, 80,  30 );
   
   buttonTara.setFont    (new Font("Helvetica-Bold", Font.BOLD,  18));
   buttonVolInc.setFont  (new Font("Helvetica-Bold", Font.PLAIN, 22));
@@ -177,10 +209,10 @@ public void createGUI()
   buttonTara.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   buttonVolInc.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   buttonVolDec.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
-  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
   button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
   buttonStart.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonRefill_1.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonRefill_2.setLocalColorScheme(GCScheme.RED_SCHEME);
