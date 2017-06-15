@@ -7,6 +7,9 @@ void caricaParametri()
   /////////////////////////////////////////////////////
   // Carico i parametri Base dal file configSerbatoi //
   /////////////////////////////////////////////////////
+  
+  // Se il file è presente lo carico altrimenti segnalo e creo un nuovo 
+  // file di default
   try
   {
     reader = createReader(dataPath("configSerbatoi.csv"));

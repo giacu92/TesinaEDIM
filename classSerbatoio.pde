@@ -83,16 +83,25 @@ class Serbatoio
   /**
   *  Svuota il serbatoio della quantità indicata nel parametro _volume se
   *  tale parametro non supera il volume residuo del serbatoio meno la tolleranza.
-  *  @param _volume: la quantità in ml da erogare.
+  *  @param _volume la quantità in ml da erogare.
+  *  @return done ritorna vero se è possibile erogare la quantità richiesta,
+  *               falso altrimenti.
   */
-  float pour(float _volume)
+  boolean pour(float _volume)
   {
+    boolean done = false;
     if (currentVolume-toll >= _volume)
+    {
       currentVolume -= _volume;
+      done = true;
+    }
     else
+    {
       println("not enough paste");
-      
-    return currentVolume;
+      done = false;
+    }
+    
+    return done;
   }
   
   /**
@@ -153,5 +162,14 @@ class Serbatoio
   void setToll_ml(float tolerance)
   {
     this.toll = tolerance;
+  }
+  
+  /**
+  *  Ritorna il nome impostato per il serbatoio.
+  *  @return il nome impostato per il serbatoio.
+  */
+  String getName()
+  {
+    return this.name;
   }
 }

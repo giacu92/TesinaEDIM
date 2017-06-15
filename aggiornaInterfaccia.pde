@@ -6,7 +6,7 @@ void aggiornaInterfaccia()
   finestraLogMacchina.beginDraw();
     finestraLogMacchina.textSize(16);
     finestraLogMacchina.background(g.backgroundColor);
-    finestraLogMacchina.text("Ciao", 10, 20);
+    finestraLogMacchina.text(serbatoioError, 10, 20);
   finestraLogMacchina.endDraw();
   image(finestraLogMacchina, 300, 30);
   

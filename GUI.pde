@@ -28,6 +28,30 @@ public void buttonVolDec_click(GButton source, GEvent event)
   println("Volume Decrease clicked");
 }
 
+/**  Inizia la procedura di miscelazione:
+*  Diminuisce di una unità la quantità di crema totale richiesta.
+*/
+public void buttonStart_click(GButton source, GEvent event)
+{
+  println("Start clicked");
+  
+  //calcolo i volumi da miscelare ed erogo.
+  if(serbatoio1.pour(1))
+  {
+    if(serbatoio2.pour(20))
+    {
+      // erogazione da entrambi i serbatoi...
+      
+    }
+    else
+    {
+      serbatoioError = "Quantità di " + serbatoio2.getName() + " non sufficiente";
+      serbatoio1.refill(1);
+    }
+  }
+  else  serbatoioError = "Quantità di " + serbatoio1.getName() + " non sufficiente";
+}
+
 // Variable declatations
 GButton buttonTara;    //serve a fissare il peso del contenitore con la tara.
 GButton buttonVolInc;  //serve ad aumentare il volume totale della crema
@@ -84,4 +108,5 @@ public void createGUI()
   buttonTara.addEventHandler  (this, "buttonTara_click");
   buttonVolInc.addEventHandler(this, "buttonVolInc_click");
   buttonVolDec.addEventHandler(this, "buttonVolInc_click");
+  buttonStart.addEventHandler (this, "buttonStart_click");
 }

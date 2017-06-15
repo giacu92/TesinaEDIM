@@ -9,6 +9,8 @@ Serbatoio serbatoio1, serbatoio2;
 color c1 = color(100, 255, 255);  // colore del serbatoio1 (celeste)
 color c2 = color(255, 30, 30);    // colore del serbatoio2 (rosso)
 
+String serbatoioError = "";
+
 void setup()
 {
   size(800, 480);
