@@ -161,7 +161,7 @@ public void createGUI()
   surface.setTitle("Tesina EDIM 2017 - Giacomo Mammarella");
   
   //TextFields:                      X    Y    W    H
-  tfQuantity = new GTextField(this, 480,  23,  70,  24, G4P.SCROLLBARS_NONE);
+  tfQuantity = new GTextField(this, 500,  28,  70,  24, G4P.SCROLLBARS_NONE);
   
   tfQuantity.setText("100.0");
   tfQuantity.setOpaque(true);

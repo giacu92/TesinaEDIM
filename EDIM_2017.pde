@@ -34,6 +34,8 @@ void draw()
 {
   // Display
   background(0); // Metto lo sfondo nero
+  textSize(18);
+  text("Diluizione:", 30, 180);
   
   aggiornaInterfaccia();
 }
