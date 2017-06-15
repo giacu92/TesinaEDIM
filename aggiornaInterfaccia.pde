@@ -12,6 +12,9 @@ void aggiornaInterfaccia()
   finestraLogMacchina.endDraw();
   image(finestraLogMacchina, 290, 30);
   
+  image(logoUnivaq, 600, 30, width/12, height/6);
+  image(logoR13, 690, 30, width/12, height/6);
+  
   //Serbatoi:
   image(serbatoio1.drawVolume(), 30,  260);
   image(serbatoio2.drawVolume(), 150, 260);

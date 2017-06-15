@@ -5,6 +5,9 @@ import java.awt.Font;
 // Scrittura sul disco
 import java.io.FileWriter;
 
+// Immagine logo univaq
+PImage logoUnivaq, logoR13;
+
 int WinSize_X = 800;
 int WinSize_Y = 480;
 
@@ -27,7 +30,8 @@ void setup()
   caricaParametri();
   
   // Creo gli altri oggetti della GUI:
-  
+  logoUnivaq = loadImage("univaq.gif");
+  logoR13    = loadImage("R13.png");
 }
 
 void draw()
