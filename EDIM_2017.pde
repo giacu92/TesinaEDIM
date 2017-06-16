@@ -15,7 +15,7 @@ Serbatoio serbatoio1, serbatoio2;
 color c1 = color(100, 255, 255);  // colore del serbatoio1 (celeste)
 color c2 = color(255, 30, 30);    // colore del serbatoio2 (rosso)
 
-String serbatoioError = "";
+String serbatoioError = "", clientiError = "";
 float diluizione = 1;
 
 void setup()
@@ -60,6 +60,8 @@ void exit()
                      serbatoio2.getCurrentVolume()     );
     output.flush();
     output.close();
+    
+    //ordino il file listaClienti.csv in ordine alfabetico:
     
     super.exit();
 }

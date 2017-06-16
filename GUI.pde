@@ -13,6 +13,46 @@ public void tfQuantity_change(GTextField source, GEvent event)
   if(float(tfQuantity.getText()) > 999) tfQuantity.setText("999.0");
 }
 
+/** Cliente scelto nella DropList
+*
+*/
+public void dlClienti_click(GDropList source, GEvent event)
+{
+  String riga = "";
+  String[] parametri;
+  BufferedReader reader;
+  int index = dlClienti.getSelectedIndex();
+  
+  try
+  {
+    reader = createReader(dataPath("listaClienti.csv"));
+    
+    //leggo la prima riga per verificare l'accessibilità del file
+    //try {riga = reader.readLine();} catch (IOException e) {e.printStackTrace();}
+  
+    //carico la riga selezionata:
+    try
+    {
+      for(int i=0; i<=index; i++)  riga = reader.readLine();
+      parametri = split(riga, ',');
+      //(cognome[0],nome[1],cellphone[2],quantità[3],diluizione[4])
+      tfName.setText(parametri[1]);
+      tfSurname.setText(parametri[0]);
+      tfCellphone.setText(parametri[2]);
+      tfQuantity.setText(parametri[3]);
+      diluizione = Float.valueOf(parametri[4]);
+    }
+    catch (IOException e) {e.printStackTrace();}
+  }
+  catch (Exception e)
+  {
+    //segnalo l'errore:
+    e.printStackTrace();
+    println("clienti inaccessibile");
+    clientiError = "file listaClienti.csv inaccessibile.";
+  }
+}
+
 /**  TARA:
 *  Pesa la tazza e fissa la tara.
 */
@@ -144,6 +184,9 @@ public void buttonRefill_2_click(GButton source, GEvent event)
 
 // Variable declatations
 GTextField tfQuantity;
+GTextField tfName, tfSurname, tfCellphone;
+
+GDropList dlClienti;
 
 GButton buttonTara;    //serve a fissare il peso del contenitore con la tara.
 GButton buttonVolInc;  //serve ad aumentare il volume totale della crema
@@ -160,23 +203,43 @@ public void createGUI()
   G4P.setCursor(ARROW);
   surface.setTitle("Tesina EDIM 2017 - Giacomo Mammarella");
   
-  //TextFields:                      X    Y    W    H
-  tfQuantity = new GTextField(this, 500,  28,  70,  24, G4P.SCROLLBARS_NONE);
+  //TextFields:                       X   Y    W    H
+  tfQuantity  = new GTextField(this, 485, 28,  70,  24, G4P.SCROLLBARS_NONE);
+  tfName      = new GTextField(this, 380, 303, 120, 22, G4P.SCROLLBARS_NONE);
+  tfSurname   = new GTextField(this, 380, 329, 120, 22, G4P.SCROLLBARS_NONE);
+  tfCellphone = new GTextField(this, 380, 355, 120, 22, G4P.SCROLLBARS_NONE);
   
   tfQuantity.setText("100.0");
+  
   tfQuantity.setOpaque(true);
+  tfName.setOpaque(true);
+  tfSurname.setOpaque(true);
+  tfCellphone.setOpaque(true);
+  
   tfQuantity.addEventHandler(this, "tfQuantity_change");
+  //tfName.addEventHandler(this, "tfName_change");
+  //tfSurname.addEventHandler(this, "tfSurname_change");
+  //tfSurname.addEventHandler(this, "tfCellphone_change");
+  
   tfQuantity.setFont(new Font("Helvetica", Font.PLAIN, 18));
+  tfName.setFont(new Font("Helvetica", Font.PLAIN, 16));
+  tfSurname.setFont(new Font("Helvetica", Font.PLAIN, 16));
+  tfCellphone.setFont(new Font("Helvetica", Font.PLAIN, 16));
+  
+  //DropLists:                     X    Y    W    H
+  dlClienti = new GDropList(this, 380, 277, 140, 90, 3);
+  dlClienti.setItems(loadStrings("listaClienti.csv"), 1);
+  dlClienti.addEventHandler(this, "dlClienti_click");
   
   //Buttons                           X    Y    W    H
   buttonTara     = new GButton(this, 30,  30,  100, 100);
-  buttonVolInc   = new GButton(this, 190, 30,  80,  45 );
-  buttonVolDec   = new GButton(this, 190, 85,  80,  45 );
+  buttonVolInc   = new GButton(this, 170, 30,  80,  45 );
+  buttonVolDec   = new GButton(this, 170, 85,  80,  45 );
   button1_1      = new GButton(this, 30,  200, 140, 50 );
   button1_15     = new GButton(this, 230, 200, 140, 50 );
   button1_2      = new GButton(this, 430, 200, 140, 50 );
   button1_3      = new GButton(this, 630, 200, 140, 50 );
-  buttonStart    = new GButton(this, 430, 280, 340, 80 );
+  buttonStart    = new GButton(this, 630, 280, 140, 50 );
   buttonRefill_1 = new GButton(this, 50,  430, 80,  30 );
   buttonRefill_2 = new GButton(this, 170, 430, 80,  30 );
   
@@ -202,7 +265,7 @@ public void createGUI()
   button1_15.setText("1 : 1.5");
   button1_2.setText("1 : 2");
   button1_3.setText("1 : 3");
-  buttonStart.setText("Start");
+  buttonStart.setText("Erogazione");
   buttonRefill_1.setText("Refill");
   buttonRefill_2.setText("Refill");
   

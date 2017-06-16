@@ -1,19 +1,34 @@
 void aggiornaInterfaccia()
 {
   
-  //Testo                                         W    H
+  //Testo Log Macchina                            W    H
   PGraphics finestraLogMacchina = createGraphics(500, 200);
   finestraLogMacchina.beginDraw();
     finestraLogMacchina.textSize(16);
     finestraLogMacchina.background(g.backgroundColor);
-    finestraLogMacchina.text("Quantità da miscelare ml", 10, 15);
-    finestraLogMacchina.text("Diluizione: 1:" + nf(diluizione, 0, 0), 10, 35);
-    finestraLogMacchina.text(serbatoioError, 10, 55);
+    finestraLogMacchina.text("Quantità da miscelare ml:", 10, 15);
+    finestraLogMacchina.text("Diluizione: 1:" + nf(diluizione, 0, 0), 10, 40);
+    finestraLogMacchina.text(serbatoioError, 10, 65);
+    finestraLogMacchina.text(clientiError, 10, 90);
   finestraLogMacchina.endDraw();
-  image(finestraLogMacchina, 290, 30);
+  image(finestraLogMacchina, 270, 30);
   
-  image(logoUnivaq, 600, 30, width/12, height/6);
-  image(logoR13, 690, 30, width/12, height/6);
+  //Dati utente, salvataggio e richiamo          W    H
+  PGraphics finestraDatiUtente = createGraphics(500, 200);
+  finestraDatiUtente.beginDraw();
+    finestraDatiUtente.textSize(16);
+    finestraDatiUtente.background(g.backgroundColor);
+    finestraDatiUtente.text("Cliente:", 10, 15);
+    finestraDatiUtente.text("Nome:", 10, 40);
+    finestraDatiUtente.text("Cognome:", 10, 65);
+    finestraDatiUtente.text("Cellulare:", 10, 90);
+    finestraDatiUtente.endDraw();
+  image(finestraDatiUtente, 270, 280);
+  
+  
+  
+  image(logoUnivaq, 610, 30, width/12, height/6);
+  image(logoR13, 700, 30, width/12, height/6);
   
   //Serbatoi:
   image(serbatoio1.drawVolume(), 30,  260);
