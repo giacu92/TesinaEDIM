@@ -79,7 +79,6 @@ public void buttonVolInc_click(GButton source, GEvent event)
 */
 public void buttonVolDec_click(GButton source, GEvent event)
 {
-  println("Volume Decrease clicked");
   float val = Float.valueOf(tfQuantity.getText());
   val -= 10;
   if (val < 0)  val = 0;
@@ -112,8 +111,6 @@ public void button1_3_click(GButton source, GEvent event)  {diluizione = 3;}
 */
 public void buttonStart_click(GButton source, GEvent event)
 {
-  println("Start clicked");
-  
   //calcolo i volumi da miscelare ed erogo.
   float vol = Float.valueOf(tfQuantity.getText()) / (diluizione + 1);
   
@@ -201,6 +198,8 @@ public void buttonDelClient_click(GButton source, GEvent event)
   dlClienti.setSelected(0);
 }
 
+/**  CHIUDO TERMINO IL PROGRAMMA
+*/
 public void buttonExit_click(GButton source, GEvent event)
 {
   exit();
@@ -319,17 +318,17 @@ public void createGUI()
   buttonDelClient.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonExit.setLocalColorScheme(GCScheme.RED_SCHEME);
   
-  buttonTara.addEventHandler  (this, "buttonTara_click");
-  buttonVolInc.addEventHandler(this, "buttonVolInc_click");
-  buttonVolDec.addEventHandler(this, "buttonVolDec_click");
-  button1_1.addEventHandler(this, "button1_1_click");
-  button1_15.addEventHandler(this, "button1_15_click");
-  button1_2.addEventHandler(this, "button1_2_click");
-  button1_3.addEventHandler(this, "button1_3_click");
-  buttonStart.addEventHandler (this, "buttonStart_click");
-  buttonRefill_1.addEventHandler(this, "buttonRefill_1_click");
-  buttonRefill_2.addEventHandler(this, "buttonRefill_2_click");
+  buttonTara.addEventHandler     (this, "buttonTara_click"     );
+  buttonVolInc.addEventHandler   (this, "buttonVolInc_click"   );
+  buttonVolDec.addEventHandler   (this, "buttonVolDec_click"   );
+  button1_1.addEventHandler      (this, "button1_1_click"      );
+  button1_15.addEventHandler     (this, "button1_15_click"     );
+  button1_2.addEventHandler      (this, "button1_2_click"      );
+  button1_3.addEventHandler      (this, "button1_3_click"      );
+  buttonStart.addEventHandler    (this, "buttonStart_click"    );
+  buttonRefill_1.addEventHandler (this, "buttonRefill_1_click" );
+  buttonRefill_2.addEventHandler (this, "buttonRefill_2_click" );
   buttonNewClient.addEventHandler(this, "buttonNewClient_click");
   buttonDelClient.addEventHandler(this, "buttonDelClient_click");
-  buttonExit.addEventHandler(this, "buttonExit_click");
+  buttonExit.addEventHandler     (this, "buttonExit_click"     );
 }

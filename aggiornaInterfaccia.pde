@@ -1,5 +1,8 @@
 void aggiornaInterfaccia()
 {
+  //Testo DILUIZIONE:
+  textSize(18);
+  text("Diluizione:", 30, 180);
   
   //Testo Log Macchina                            W    H
   PGraphics finestraLogMacchina = createGraphics(500, 200);
@@ -62,4 +65,7 @@ void aggiornaInterfaccia()
   //Serbatoi:
   image(serbatoio1.drawVolume(), 30,  260);
   image(serbatoio2.drawVolume(), 150, 260);
+  
+  if (serbatoio1.getPercentage() < 20)  GPIO.digitalWrite(4, GPIO.HIGH);
+  else                                  GPIO.digitalWrite(4, GPIO.LOW);
 }

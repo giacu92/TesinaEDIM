@@ -8,16 +8,18 @@ import java.io.Writer;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 
+// Raspberry GPIO:
+import processing.io.*;
+
+// Collections
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
-// Immagine logo univaq
+// Immagine logo univaq e R13
 PImage logoUnivaq, logoR13;
 
-int WinSize_X = 800;
-int WinSize_Y = 480;
-
+// Inizializzazione variabili ed oggetti globali
 Serbatoio serbatoio1, serbatoio2;
 color c1 = color(100, 255, 255);  // colore del serbatoio1 (celeste)
 color c2 = color(255, 30, 30);    // colore del serbatoio2 (rosso)
@@ -25,15 +27,19 @@ color c2 = color(255, 30, 30);    // colore del serbatoio2 (rosso)
 String serbatoioError = "", clientiError = "";
 float diluizione = 1;
 
+// SETUP:
 void setup()
 {
   size(800, 480);
-  frameRate(10);
+  frameRate(30);
+  
+  // Inizializzo GPIO:
+  GPIO.pinMode(4, GPIO.OUTPUT);
   
   // Creo GUI:
   createGUI();
   
-  // Carico i parametri dai file txt:
+  // Cari1o i parametri dai file txt:
   caricaParametri();
   
   // Creo gli altri oggetti della GUI:
@@ -41,12 +47,11 @@ void setup()
   logoR13    = loadImage("R13.png");
 }
 
+// DRAW
 void draw()
 {
   // Display
   background(0); // Metto lo sfondo nero
-  textSize(18);
-  text("Diluizione:", 30, 180);
   
   aggiornaInterfaccia();
 }
@@ -55,7 +60,7 @@ void draw()
 @Override
 void exit()
 {
-    //creo il file configSerbatoi.csv per la prossima volta:
+    //Creo o aggiorno il file "configSerbatoi.csv" per la prossima apertura:
     PrintWriter output;
     output = createWriter(dataPath("configSerbatoi.csv"));
     output.println("name,maxVolume,currentVolume");

@@ -20,8 +20,6 @@ void removeLineFromFile(String _stringa, String _nomeFile)
         stringBuilder.append(ls);
       }
     }
-    //stringBuilder.
-    println(stringBuilder.toString());
     reader.close();
     
     //scrivo il nuovo file senza il cliente cercato.
