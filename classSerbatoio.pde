@@ -7,7 +7,7 @@ class Serbatoio
   int   imageHeight;
   color colore;
   PGraphics pg;
-  float toll = 10; //tolleranza serbatoio in ml, non lo svuoto mai oltre questo val 
+  float toll = 2; //tolleranza serbatoio in ml, non lo svuoto mai oltre questo val 
   String name = "";
   
   private float m, q = 0;

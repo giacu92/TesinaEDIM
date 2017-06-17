@@ -25,6 +25,35 @@ void aggiornaInterfaccia()
     finestraDatiUtente.endDraw();
   image(finestraDatiUtente, 270, 280);
   
+  //Coloro la diluizione selezionata:
+  if (diluizione == 1)
+  {
+    button1_1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+    button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  }
+  else if (diluizione == 1.5)
+  {
+    button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_15.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+    button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  }
+  else if (diluizione == 2)
+  {
+    button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_2.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+    button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+  }
+  else if (diluizione == 3)
+  {
+    button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
+    button1_3.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  }
   
   
   image(logoUnivaq, 610, 30, width/12, height/6);

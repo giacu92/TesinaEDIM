@@ -35,6 +35,7 @@ public void dlClienti_click(GDropList source, GEvent event)
     {
       for(int i=0; i<=index; i++)  riga = reader.readLine();
       parametri = split(riga, ',');
+      
       //(cognome[0],nome[1],cellphone[2],quantità[3],diluizione[4])
       tfName.setText(parametri[1]);
       tfSurname.setText(parametri[0]);
@@ -42,7 +43,7 @@ public void dlClienti_click(GDropList source, GEvent event)
       tfQuantity.setText(parametri[3]);
       diluizione = Float.valueOf(parametri[4]);
     }
-    catch (IOException e) {e.printStackTrace();}
+    catch (Exception e) {e.printStackTrace();}
   }
   catch (Exception e)
   {
@@ -89,54 +90,22 @@ public void buttonVolDec_click(GButton source, GEvent event)
 /**  DILUIZIONE 1:1
 *  Fissa la diluizione 1 a 1
 */
-public void button1_1_click(GButton source, GEvent event)
-{
-  // imposto diluizione a 1 e metto gli altri tasti blu
-  diluizione = 1;
-  button1_1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
-  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-}
+public void button1_1_click(GButton source, GEvent event)  {diluizione = 1;}
 
 /**  DILUIZIONE 1:1.5
 *  Fissa la diluizione 1 a 1.5
 */
-public void button1_15_click(GButton source, GEvent event)
-{
-  // imposto diluizione a 1.5 e metto gli altri tasti blu
-  diluizione = 1.5;
-  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_15.setLocalColorScheme(GCScheme.GREEN_SCHEME);
-  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-}
+public void button1_15_click(GButton source, GEvent event)  {diluizione = 1.5;}
 
 /**  DILUIZIONE 1:2
 *  Fissa la diluizione 1 a 2
 */
-public void button1_2_click(GButton source, GEvent event)
-{
-  // imposto diluizione a 2 e metto gli altri tasti blu
-  diluizione = 2;
-  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_2.setLocalColorScheme(GCScheme.GREEN_SCHEME);
-  button1_3.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-}
+public void button1_2_click(GButton source, GEvent event)  {diluizione = 2;}
 
 /**  DILUIZIONE 1:3
 *  Fissa la diluizione 1 a 3
 */
-public void button1_3_click(GButton source, GEvent event)
-{
-  // imposto diluizione a 3 e metto gli altri tasti blu
-  diluizione = 3;
-  button1_1.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_15.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_2.setLocalColorScheme(GCScheme.BLUE_SCHEME);
-  button1_3.setLocalColorScheme(GCScheme.GREEN_SCHEME);
-}
+public void button1_3_click(GButton source, GEvent event)  {diluizione = 3;}
 
 /**  Inizia la procedura di miscelazione:
 *  Diminuisce di una unità la quantità di crema totale richiesta.
@@ -182,6 +151,56 @@ public void buttonRefill_2_click(GButton source, GEvent event)
   serbatoio2.refill(9e6);
 }
 
+/**
+*  Aggiungo un cliente. Se già c'è aggiorno i dati agli ultimi inseriti.
+*/
+public void buttonNewClient_click(GButton source, GEvent event)
+{
+  //Inizializzazioni
+  Cliente nuovoCliente;
+  String[] datiCliente;
+  
+  nuovoCliente = new Cliente(tfName.getText(), tfSurname.getText(), tfCellphone.getText(), Float.valueOf(tfQuantity.getText()), diluizione);
+  datiCliente = split(nuovoCliente.toString(), ',');  // scrivo il cliente in datiCliente
+  String stringa = datiCliente[0] + "," + datiCliente[1] + "," + datiCliente[2];
+
+  // qui creo il nuovo cliente o aggiorno quello vecchio
+  //println(dlClienti.insertItem(1, nuovoCliente.toString())); <-- non funziona.. ??!?!?!? vatti a fidà dei metodi degli altri..
+  removeLineFromFile(stringa, "listaClienti.csv"); //se la trova la toglie, sennò nn fa niente
+  
+  //Aggiungo il nuovo cliente alla lista (se il cliente c'era è stato cancellato così posso aggiungerlo come nuovo)
+  try
+  {
+    Writer output = new BufferedWriter(new FileWriter(dataPath("listaClienti.csv"), true)); //<>//
+    output.append(nuovoCliente.toString());
+    output.flush();
+    output.close();
+    
+    //Carico la nuova lista all'utente selezionato (l'ultimo)
+    dlClienti.setItems(loadStrings("listaClienti.csv"), 99999);
+  }
+  catch (Exception e)
+  {
+    println("unable to add new client");
+    clientiError = "Impossibile aggiungere nuovo cliente.";
+  }  
+}
+
+/**
+*  Elimino il cliente selezionato
+*/
+public void buttonDelClient_click(GButton source, GEvent event)
+{
+  String stringa = tfSurname.getText() + "," + tfName.getText() + "," + tfCellphone.getText();
+
+  //Qui elimino il cliente:
+  //println(dlClienti.insertItem(1, nuovoCliente.toString())); <-- non funziona.. ??!?!?!? vatti a fidà dei metodi degli altri..
+  removeLineFromFile(stringa, "listaClienti.csv"); //se la trova la toglie, sennò nn fa niente
+  
+  dlClienti.setItems(loadStrings("listaClienti.csv"), 99999);
+  dlClienti.setSelected(0);
+}
+
 // Variable declatations
 GTextField tfQuantity;
 GTextField tfName, tfSurname, tfCellphone;
@@ -194,6 +213,7 @@ GButton buttonVolDec;  //serve a  diminuire il volume totale della crema
 GButton button1_1, button1_15, button1_2, button1_3;
 GButton buttonStart;   //avvia l'erogazione
 GButton buttonRefill_1, buttonRefill_2;
+GButton buttonNewClient, buttonDelClient;
 
 // Create all the GUI controls.
 public void createGUI()
@@ -228,31 +248,36 @@ public void createGUI()
   
   //DropLists:                     X    Y    W    H
   dlClienti = new GDropList(this, 380, 277, 140, 90, 3);
-  dlClienti.setItems(loadStrings("listaClienti.csv"), 1);
+  dlClienti.setItems(loadStrings("listaClienti.csv"), 0);
   dlClienti.addEventHandler(this, "dlClienti_click");
+  dlClienti.setLocalColorScheme(GCScheme.BLUE_SCHEME);
   
-  //Buttons                           X    Y    W    H
-  buttonTara     = new GButton(this, 30,  30,  100, 100);
-  buttonVolInc   = new GButton(this, 170, 30,  80,  45 );
-  buttonVolDec   = new GButton(this, 170, 85,  80,  45 );
-  button1_1      = new GButton(this, 30,  200, 140, 50 );
-  button1_15     = new GButton(this, 230, 200, 140, 50 );
-  button1_2      = new GButton(this, 430, 200, 140, 50 );
-  button1_3      = new GButton(this, 630, 200, 140, 50 );
-  buttonStart    = new GButton(this, 630, 280, 140, 50 );
-  buttonRefill_1 = new GButton(this, 50,  430, 80,  30 );
-  buttonRefill_2 = new GButton(this, 170, 430, 80,  30 );
+  //Buttons                            X    Y    W    H
+  buttonTara      = new GButton(this, 30,  30,  100, 100);
+  buttonVolInc    = new GButton(this, 170, 30,  80,  45 );
+  buttonVolDec    = new GButton(this, 170, 85,  80,  45 );
+  button1_1       = new GButton(this, 30,  200, 140, 50 );
+  button1_15      = new GButton(this, 230, 200, 140, 50 );
+  button1_2       = new GButton(this, 430, 200, 140, 50 );
+  button1_3       = new GButton(this, 630, 200, 140, 50 );
+  buttonStart     = new GButton(this, 630, 280, 140, 50 );
+  buttonRefill_1  = new GButton(this, 50,  430, 80,  30 );
+  buttonRefill_2  = new GButton(this, 170, 430, 80,  30 );
+  buttonNewClient = new GButton(this, 290, 400, 80,  30 );
+  buttonDelClient = new GButton(this, 410, 400, 80,  30 );
   
-  buttonTara.setFont    (new Font("Helvetica-Bold", Font.BOLD,  18));
-  buttonVolInc.setFont  (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  buttonVolDec.setFont  (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  button1_1.setFont     (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  button1_15.setFont    (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  button1_2.setFont     (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  button1_3.setFont     (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  buttonStart.setFont   (new Font("Helvetica-Bold", Font.PLAIN, 22));
-  buttonRefill_1.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
-  buttonRefill_2.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
+  buttonTara.setFont     (new Font("Helvetica-Bold", Font.BOLD,  18));
+  buttonVolInc.setFont   (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  buttonVolDec.setFont   (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  button1_1.setFont      (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  button1_15.setFont     (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  button1_2.setFont      (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  button1_3.setFont      (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  buttonStart.setFont    (new Font("Helvetica-Bold", Font.PLAIN, 22));
+  buttonRefill_1.setFont (new Font("Helvetica-Bold", Font.PLAIN, 14));
+  buttonRefill_2.setFont (new Font("Helvetica-Bold", Font.PLAIN, 14));
+  buttonNewClient.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
+  buttonDelClient.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
   
   //buttonTara.setTextBold();
   //buttonVolInc.setTextBold();
@@ -268,6 +293,8 @@ public void createGUI()
   buttonStart.setText("Erogazione");
   buttonRefill_1.setText("Refill");
   buttonRefill_2.setText("Refill");
+  buttonNewClient.setText("Salva");
+  buttonDelClient.setText("Elimina");
   
   buttonTara.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   buttonVolInc.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
@@ -279,6 +306,8 @@ public void createGUI()
   buttonStart.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonRefill_1.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonRefill_2.setLocalColorScheme(GCScheme.RED_SCHEME);
+  buttonNewClient.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  buttonDelClient.setLocalColorScheme(GCScheme.RED_SCHEME);
   
   buttonTara.addEventHandler  (this, "buttonTara_click");
   buttonVolInc.addEventHandler(this, "buttonVolInc_click");
@@ -290,4 +319,6 @@ public void createGUI()
   buttonStart.addEventHandler (this, "buttonStart_click");
   buttonRefill_1.addEventHandler(this, "buttonRefill_1_click");
   buttonRefill_2.addEventHandler(this, "buttonRefill_2_click");
+  buttonNewClient.addEventHandler(this, "buttonNewClient_click");
+  buttonDelClient.addEventHandler(this, "buttonDelClient_click");
 }

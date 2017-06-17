@@ -4,6 +4,13 @@ import java.awt.Font;
 
 // Scrittura sul disco
 import java.io.FileWriter;
+import java.io.Writer;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 // Immagine logo univaq
 PImage logoUnivaq, logoR13;
@@ -62,6 +69,7 @@ void exit()
     output.close();
     
     //ordino il file listaClienti.csv in ordine alfabetico:
+    sortFile("listaClienti.csv", "listaClienti.csv");
     
     super.exit();
 }
