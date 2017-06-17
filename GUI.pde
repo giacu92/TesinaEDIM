@@ -201,6 +201,11 @@ public void buttonDelClient_click(GButton source, GEvent event)
   dlClienti.setSelected(0);
 }
 
+public void buttonExit_click(GButton source, GEvent event)
+{
+  exit();
+}
+
 // Variable declatations
 GTextField tfQuantity;
 GTextField tfName, tfSurname, tfCellphone;
@@ -214,6 +219,7 @@ GButton button1_1, button1_15, button1_2, button1_3;
 GButton buttonStart;   //avvia l'erogazione
 GButton buttonRefill_1, buttonRefill_2;
 GButton buttonNewClient, buttonDelClient;
+GButton buttonExit;
 
 // Create all the GUI controls.
 public void createGUI()
@@ -265,6 +271,7 @@ public void createGUI()
   buttonRefill_2  = new GButton(this, 170, 430, 80,  30 );
   buttonNewClient = new GButton(this, 290, 400, 80,  30 );
   buttonDelClient = new GButton(this, 410, 400, 80,  30 );
+  buttonExit      = new GButton(this, 640, 360, 120, 30 );
   
   buttonTara.setFont     (new Font("Helvetica-Bold", Font.BOLD,  18));
   buttonVolInc.setFont   (new Font("Helvetica-Bold", Font.PLAIN, 22));
@@ -278,23 +285,25 @@ public void createGUI()
   buttonRefill_2.setFont (new Font("Helvetica-Bold", Font.PLAIN, 14));
   buttonNewClient.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
   buttonDelClient.setFont(new Font("Helvetica-Bold", Font.PLAIN, 14));
+  buttonExit.setFont     (new Font("Helvetica-Bold", Font.PLAIN, 14));
   
   //buttonTara.setTextBold();
   //buttonVolInc.setTextBold();
   //buttonVolDec.setTextBold();
   
-  buttonTara.setText("Tara");
-  buttonVolInc.setText("+");
-  buttonVolDec.setText("-");
-  button1_1.setText("1 : 1");
-  button1_15.setText("1 : 1.5");
-  button1_2.setText("1 : 2");
-  button1_3.setText("1 : 3");
-  buttonStart.setText("Erogazione");
-  buttonRefill_1.setText("Refill");
-  buttonRefill_2.setText("Refill");
+  buttonTara.setText     ("Tara");
+  buttonVolInc.setText   ("+");
+  buttonVolDec.setText   ("-");
+  button1_1.setText      ("1 : 1");
+  button1_15.setText     ("1 : 1.5");
+  button1_2.setText      ("1 : 2");
+  button1_3.setText      ("1 : 3");
+  buttonStart.setText    ("Erogazione");
+  buttonRefill_1.setText ("Refill");
+  buttonRefill_2.setText ("Refill");
   buttonNewClient.setText("Salva");
   buttonDelClient.setText("Elimina");
+  buttonExit.setText     ("Exit");
   
   buttonTara.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
   buttonVolInc.setLocalColorScheme(GCScheme.PURPLE_SCHEME);
@@ -308,6 +317,7 @@ public void createGUI()
   buttonRefill_2.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonNewClient.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonDelClient.setLocalColorScheme(GCScheme.RED_SCHEME);
+  buttonExit.setLocalColorScheme(GCScheme.RED_SCHEME);
   
   buttonTara.addEventHandler  (this, "buttonTara_click");
   buttonVolInc.addEventHandler(this, "buttonVolInc_click");
@@ -321,4 +331,5 @@ public void createGUI()
   buttonRefill_2.addEventHandler(this, "buttonRefill_2_click");
   buttonNewClient.addEventHandler(this, "buttonNewClient_click");
   buttonDelClient.addEventHandler(this, "buttonDelClient_click");
+  buttonExit.addEventHandler(this, "buttonExit_click");
 }
