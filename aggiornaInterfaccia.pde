@@ -66,6 +66,22 @@ void aggiornaInterfaccia()
   image(serbatoio1.drawVolume(), 30,  260);
   image(serbatoio2.drawVolume(), 150, 260);
   
-  if (serbatoio1.getPercentage() < 20)  GPIO.digitalWrite(4, GPIO.HIGH);
-  else                                  GPIO.digitalWrite(4, GPIO.LOW);
+  if (serbatoio1.getPercentage() < 20 && serbatoio1.getPercentage() > serbatoio1.getToll_perc())
+  {
+    //Segnalo serbatoio1 quasi esaurito tramite accensione led
+    GPIO.digitalWrite(4, GPIO.HIGH);
+    //serbatoioError = "Serbatoio " + serbatoio1.getName() + " quasi esaurito";
+  }
+  else if (serbatoio2.getPercentage() < 20 && serbatoio2.getPercentage() > serbatoio2.getToll_perc())
+  {
+    //Segnalo serbatoio2 quasi esaurito tramite accensione led
+    GPIO.digitalWrite(5, GPIO.HIGH);
+    //serbatoioError = "Serbatoio " + serbatoio2.getName() + " quasi esaurito";
+  }
+  else 
+  {
+    GPIO.digitalWrite(4, GPIO.LOW);
+    GPIO.digitalWrite(5, GPIO.LOW);
+    //serbatoioError = "";
+  }
 }

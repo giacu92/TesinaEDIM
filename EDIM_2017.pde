@@ -35,6 +35,7 @@ void setup()
   
   // Inizializzo GPIO:
   GPIO.pinMode(4, GPIO.OUTPUT);
+  GPIO.pinMode(5, GPIO.OUTPUT);
   
   // Creo GUI:
   createGUI();
